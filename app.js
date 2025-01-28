@@ -13,12 +13,11 @@ function asignarTextoElemento(elemento, texto){
 
 function verificarIntento(){
     let numeroDeUsuario = parseInt(document.getElementById('valorUsuario').value);
-    console.log(intentos);
     if(numeroDeUsuario === numeroSecreto){
         asignarTextoElemento('p', `Acertaste el numero en ${intentos} ${(intentos ===1) ? 'vez' : 'veces'}` );
         document.getElementById('reiniciar').removeAttribute('disabled');
     }else{
-        // El usuario no acerto
+        // El usuario no acertó
         if(numeroDeUsuario > numeroSecreto){
             asignarTextoElemento('p', 'El numero secreto es menor')
         }else{
@@ -35,8 +34,8 @@ function limpiarCaja(){
 }
 
 function generarNumeroSecreto() {
-    let numeroGenerado = Math.floor(Math.random()*numeroMaximo)+1;
-    
+    let numeroGenerado = Math.floor(Math.random()*numeroMaximo);
+    console.log(numeroGenerado);
     //Si ya sorteamos todos los numeros
     if(listaNumerosSorteados.length == numeroMaximo){
         asignarTextoElemento('p','Ya se asignaron todos los intentos posibles');
@@ -46,6 +45,7 @@ function generarNumeroSecreto() {
             return generarNumeroSecreto();
         }else{
             listaNumerosSorteados.push(numeroGenerado);
+            return numeroGenerado;
         }
     }
 }
@@ -60,7 +60,7 @@ function condicionesIniciales(){
 function reiniciarJuego(){
     //limpiar la caja
     limpiarCaja();
-    //indicar mendaje de intervalo de numeros
+    //indicar mensaje de intervalo de numeros
     //Generar el numero aleatorio
     //inicializar el numero de intentos
     condicionesIniciales();
@@ -70,4 +70,3 @@ function reiniciarJuego(){
 }
 
 condicionesIniciales();
-
